@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:mem:catalog;DB_CLOSE_DELAY=-1}
+    username: ${DATABASE_USERNAME:sa}
+    password: ${DATABASE_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+server:
+  port: ${PORT:8080}
