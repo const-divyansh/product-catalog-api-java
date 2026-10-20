@@ -350,4 +350,26 @@ class ProductControllerTest {
                 .andExpect(status().isNotFound());
         }
     }
+
+    @Nested
+    @DisplayName("OpenAPI & Swagger UI Endpoints")
+    class SwaggerTests {
+
+        @Test
+        @DisplayName("should serve OpenAPI 3.0 v3/api-docs json schema")
+        void shouldReturnOpenApiDocs() throws Exception {
+            mockMvc.perform(get("/v3/api-docs"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.openapi", startsWith("3.")))
+                .andExpect(jsonPath("$.info.title").value("Product Catalog REST API"))
+                .andExpect(jsonPath("$.paths['/api/v1/products']").exists());
+        }
+
+        @Test
+        @DisplayName("should serve Swagger UI html")
+        void shouldReturnSwaggerUi() throws Exception {
+            mockMvc.perform(get("/swagger-ui/index.html"))
+                .andExpect(status().isOk());
+        }
+    }
 }

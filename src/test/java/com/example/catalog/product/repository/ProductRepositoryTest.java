@@ -30,14 +30,12 @@ class ProductRepositoryTest {
     private TestEntityManager entityManager;
 
     private Product laptop;
-    private Product smartphone;
-    private Product runningShoes;
 
     @BeforeEach
     void setUp() {
         laptop = entityManager.persist(new Product("MacBook Pro 16", "High-performance laptop", "electronics", new BigDecimal("2499.00"), "USD"));
-        smartphone = entityManager.persist(new Product("Pixel 9 Pro", "Google flagship smartphone", "electronics", new BigDecimal("999.00"), "USD"));
-        runningShoes = entityManager.persist(new Product("Road Runner 2", "Lightweight marathon running shoes", "footwear", new BigDecimal("129.99"), "USD"));
+        entityManager.persist(new Product("Pixel 9 Pro", "Google flagship smartphone", "electronics", new BigDecimal("999.00"), "USD"));
+        entityManager.persist(new Product("Road Runner 2", "Lightweight marathon running shoes", "footwear", new BigDecimal("129.99"), "USD"));
         entityManager.flush();
     }
 

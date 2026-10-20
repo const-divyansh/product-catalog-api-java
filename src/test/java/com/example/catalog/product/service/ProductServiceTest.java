@@ -25,6 +25,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import org.mockito.ArgumentMatchers;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.never;
@@ -109,7 +110,7 @@ class ProductServiceTest {
         void shouldSearchProductsSuccessfully() {
             Product product = new Product("Smart Watch", "Fitness watch", "wearables", new BigDecimal("199.99"), "USD");
             Page<Product> page = new PageImpl<>(List.of(product));
-            given(productRepository.findAll(any(Specification.class), any(Pageable.class))).willReturn(page);
+            given(productRepository.findAll(ArgumentMatchers.<Specification<Product>>any(), any(Pageable.class))).willReturn(page);
 
             Page<ProductResponse> result = productService.search(
                 "wearables", new BigDecimal("100.00"), new BigDecimal("300.00"),
@@ -118,7 +119,7 @@ class ProductServiceTest {
 
             assertThat(result.getTotalElements()).isEqualTo(1);
             assertThat(result.getContent().get(0).name()).isEqualTo("Smart Watch");
-            then(productRepository).should().findAll(any(Specification.class), any(Pageable.class));
+            then(productRepository).should().findAll(ArgumentMatchers.<Specification<Product>>any(), any(Pageable.class));
         }
 
         @Test

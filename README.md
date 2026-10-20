@@ -94,12 +94,12 @@ The PostgreSQL configuration defined in [`docker-compose.yml`](docker-compose.ym
 
 | Parameter | Value |
 | :--- | :--- |
-| **Host** | `localhost` (external) / `db` (internal docker network) |
-| **Port** | `5432` |
+| **Host** | `localhost` (external host) / `db` (internal docker network) |
+| **Port** | `5433` (external host mapped to container 5432) |
 | **Database Name** | `catalog` |
 | **Username** | `catalog` |
 | **Password** | **`catalog`** |
-| **JDBC URL** | `jdbc:postgresql://localhost:5432/catalog` |
+| **JDBC URL** | `jdbc:postgresql://localhost:5433/catalog` |
 
 ---
 
@@ -135,6 +135,13 @@ To stop containers:
 ```bash
 docker compose down
 ```
+
+## Interactive Swagger UI & OpenAPI Documentation
+
+Once the application is running, the interactive Swagger UI and OpenAPI v3 specs are available at:
+
+- **Swagger UI Interactive Playground**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **OpenAPI v3 JSON Specification**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
 
 ---
 
