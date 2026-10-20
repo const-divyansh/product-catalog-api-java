@@ -1,5 +1,6 @@
-package com.example.catalog.product;
+package com.example.catalog.product.dto;
 
+import com.example.catalog.product.model.Product;
 import java.math.BigDecimal;
 import java.time.Instant;
 

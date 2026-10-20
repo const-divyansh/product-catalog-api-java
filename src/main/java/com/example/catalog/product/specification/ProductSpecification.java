@@ -1,6 +1,6 @@
 package com.example.catalog.product.specification;
 
-import com.example.catalog.product.Product;
+import com.example.catalog.product.model.Product;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -9,10 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Specification builder following Single Responsibility and Open-Closed principles
- * for dynamic SQL predicate generation.
- */
 public final class ProductSpecification {
 
     private ProductSpecification() {}

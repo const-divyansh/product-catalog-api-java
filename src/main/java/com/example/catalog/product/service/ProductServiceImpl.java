@@ -1,6 +1,10 @@
-package com.example.catalog.product;
+package com.example.catalog.product.service;
 
+import com.example.catalog.product.dto.ProductRequests;
+import com.example.catalog.product.dto.ProductResponse;
 import com.example.catalog.product.exception.ProductNotFoundException;
+import com.example.catalog.product.model.Product;
+import com.example.catalog.product.repository.ProductRepository;
 import com.example.catalog.product.specification.ProductSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

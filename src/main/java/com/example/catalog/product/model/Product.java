@@ -1,4 +1,4 @@
-package com.example.catalog.product;
+package com.example.catalog.product.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -47,7 +47,7 @@ public class Product {
         updatedAt = Instant.now();
     }
 
-    protected Product() {}
+    public Product() {}
 
     public Product(String name, String description, String category, BigDecimal price, String currency) {
         this.name = name;

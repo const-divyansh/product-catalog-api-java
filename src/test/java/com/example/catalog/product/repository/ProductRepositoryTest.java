@@ -1,5 +1,6 @@
-package com.example.catalog.product;
+package com.example.catalog.product.repository;
 
+import com.example.catalog.product.model.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

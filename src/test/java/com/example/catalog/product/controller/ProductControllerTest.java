@@ -1,5 +1,8 @@
-package com.example.catalog.product;
+package com.example.catalog.product.controller;
 
+import com.example.catalog.product.dto.ProductRequests;
+import com.example.catalog.product.model.Product;
+import com.example.catalog.product.repository.ProductRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

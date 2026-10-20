@@ -1,17 +1,25 @@
-package com.example.catalog.product;
+package com.example.catalog.product.controller;
 
+import com.example.catalog.product.dto.ProductRequests;
+import com.example.catalog.product.dto.ProductResponse;
+import com.example.catalog.product.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/api/v1/products")
 public class ProductController {
+
     private final ProductService service;
 
-    public ProductController(ProductService service) { this.service = service; }
+    public ProductController(ProductService service) {
+        this.service = service;
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -20,7 +28,9 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductResponse get(@PathVariable Long id) { return service.get(id); }
+    public ProductResponse get(@PathVariable Long id) {
+        return service.get(id);
+    }
 
     @GetMapping
     public Page<ProductResponse> search(
@@ -33,10 +43,12 @@ public class ProductController {
         @RequestParam(defaultValue = "createdAt") String sortBy,
         @RequestParam(defaultValue = "desc") String sortOrder
     ) {
-        if (page < 0) throw new org.springframework.web.server.ResponseStatusException(
-            HttpStatus.BAD_REQUEST, "page must be >= 0");
-        if (size < 1 || size > 100) throw new org.springframework.web.server.ResponseStatusException(
-            HttpStatus.BAD_REQUEST, "size must be between 1 and 100");
+        if (page < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "page must be >= 0");
+        }
+        if (size < 1 || size > 100) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "size must be between 1 and 100");
+        }
         return service.search(category, minPrice, maxPrice, q, page, size, sortBy, sortOrder);
     }
 
@@ -52,5 +64,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) { service.delete(id); }
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
+    }
 }

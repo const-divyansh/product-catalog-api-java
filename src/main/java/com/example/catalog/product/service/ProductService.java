@@ -1,11 +1,10 @@
-package com.example.catalog.product;
+package com.example.catalog.product.service;
 
+import com.example.catalog.product.dto.ProductRequests;
+import com.example.catalog.product.dto.ProductResponse;
 import org.springframework.data.domain.Page;
 import java.math.BigDecimal;
 
-/**
- * Product Service Interface following Interface Segregation and Dependency Inversion Principles.
- */
 public interface ProductService {
 
     ProductResponse create(ProductRequests.Create request);

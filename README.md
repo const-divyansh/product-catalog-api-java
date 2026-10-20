@@ -51,31 +51,39 @@ product-catalog-api-java/
 └── src/
     ├── main/
     │   ├── java/com/example/catalog/
-    │   │   ├── ProductCatalogApplication.java       # Spring Boot main entrypoint
+    │   │   ├── ProductCatalogApplication.java
     │   │   ├── common/
     │   │   │   └── ApiExceptionHandler.java         # Global RFC 7807 error handler
     │   │   └── product/
-    │   │       ├── Product.java                     # JPA Entity with composite indexes
-    │   │       ├── ProductController.java           # REST Controller
-    │   │       ├── ProductRequests.java             # Request DTOs (records + validation)
-    │   │       ├── ProductResponse.java             # Response DTO (immutability)
-    │   │       ├── ProductRepository.java           # Spring Data JPA Repository
-    │   │       ├── ProductService.java              # Service Interface (DIP)
-    │   │       ├── ProductServiceImpl.java          # Service Implementation
-    │   │       ├── exception/
-    │   │       │   └── ProductNotFoundException.java# Domain-specific exception
-    │   │       └── specification/
-    │   │           └── ProductSpecification.java    # Dynamic query predicate builder
+    │   │       ├── controller/
+    │   │       │   └── ProductController.java       # Web REST Controller
+    │   │       ├── service/
+    │   │       │   ├── ProductService.java          # Service interface (DIP)
+    │   │       │   └── ProductServiceImpl.java      # Service business logic implementation
+    │   │       ├── repository/
+    │   │       │   └── ProductRepository.java       # Spring Data JPA Repository (ISP)
+    │   │       ├── model/
+    │   │       │   └── Product.java                 # JPA Entity with composite indexes
+    │   │       ├── dto/
+    │   │       │   ├── ProductRequests.java         # Request records with bean validation
+    │   │       │   └── ProductResponse.java         # Immutable response record
+    │   │       ├── specification/
+    │   │       │   └── ProductSpecification.java    # Dynamic criteria predicate builder (SRP)
+    │   │       └── exception/
+    │   │           └── ProductNotFoundException.java# Domain exception
     │   └── resources/
-    │       └── application.yml                      # Configuration
+    │       └── application.yml
     └── test/
         └── java/com/example/catalog/
             ├── common/
-            │   └── ApiExceptionHandlerTest.java     # Unit tests for global exceptions
+            │   └── ApiExceptionHandlerTest.java     # Unit tests for error handling
             └── product/
-                ├── ProductControllerTest.java       # MockMvc integration tests
-                ├── ProductRepositoryTest.java       # DataJpaTest with TestEntityManager
-                └── ProductServiceTest.java          # Unit tests with Mockito mocks
+                ├── controller/
+                │   └── ProductControllerTest.java   # MockMvc REST API integration tests (19 tests)
+                ├── service/
+                │   └── ProductServiceTest.java      # Isolated service unit tests with Mockito (8 tests)
+                └── repository/
+                    └── ProductRepositoryTest.java   # @DataJpaTest slice with TestEntityManager (7 tests)
 ```
 
 ---
