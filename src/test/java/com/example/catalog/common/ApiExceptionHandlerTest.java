@@ -2,7 +2,6 @@ package com.example.catalog.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -10,7 +9,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,8 +38,8 @@ class ApiExceptionHandlerTest {
         bindingResult.addError(new FieldError("createRequest", "name", "must not be blank"));
         bindingResult.addError(new FieldError("createRequest", "price", "must be greater than or equal to 0.00"));
 
-        Method sampleMethod = this.getClass().getDeclaredMethod("dummyMethod", String.class);
-        MethodParameter methodParameter = new MethodParameter(sampleMethod, 0);
+        org.springframework.core.MethodParameter methodParameter = org.mockito.Mockito
+                .mock(org.springframework.core.MethodParameter.class);
         MethodArgumentNotValidException exception = new MethodArgumentNotValidException(methodParameter, bindingResult);
 
         ProblemDetail problemDetail = handler.handleValidation(exception);
@@ -54,10 +52,7 @@ class ApiExceptionHandlerTest {
         @SuppressWarnings("unchecked")
         List<String> errors = (List<String>) problemDetail.getProperties().get("errors");
         assertThat(errors).containsExactly(
-            "name: must not be blank",
-            "price: must be greater than or equal to 0.00"
-        );
+                "name: must not be blank",
+                "price: must be greater than or equal to 0.00");
     }
-
-    private void dummyMethod(String param) {}
 }
